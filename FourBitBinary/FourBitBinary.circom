@@ -18,6 +18,8 @@ template FourBitBinary() {
     signal input in[4];
     signal input n;
 
+    signal output out;
+    n === in[0] * 1 + in[1] * 2 + in[2] * 4 + in[3] * 8; // 2^0 + 2^1 + 2^2 + 2^3 format
 }
 
 component main{public [n]} = FourBitBinary();
