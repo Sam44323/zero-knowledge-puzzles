@@ -3,31 +3,24 @@ pragma circom 2.1.4;
 include "circomlib/bitify.circom";
 
 template Pow() {
-    // Inputs
     signal input a[2];   // a[0] = base, a[1] = exponent
     signal output c;
 
-    // Decompose exponent into bits (8-bit exponent)
     component bits = Num2Bits(8);
     bits.in <== a[1];
 
-    // Intermediate values
     signal acc[9];
     signal sq[8];
 
-    // acc[0] = 1 (multiplicative identity)
     acc[0] <== 1;
 
-    // Binary exponentiation
     for (var i = 0; i < 8; i++) {
-        // square base^(2^i)
         if (i == 0) {
             sq[i] <== a[0];
         } else {
             sq[i] <== sq[i-1] * sq[i-1];
         }
 
-        // acc[i+1] = acc[i] * (sq[i] if bit=1 else 1)
         acc[i+1] <== acc[i] * (bits.out[i] * sq[i] + (1 - bits.out[i]));
     }
 
