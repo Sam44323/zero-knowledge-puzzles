@@ -47,6 +47,7 @@ template Pow() {
         // QUADRATIC CONSTRAINT 1: Compute intermediate value based on current bit
         // If bits.out[i] = 0: temp[i] = 0 * (sq[i] - 1) = 0
         // If bits.out[i] = 1: temp[i] = 1 * (sq[i] - 1) = sq[i] - 1
+        // this is used as a selector for whether to include sq[i] in the multiplication as conditional for constraints are not allowed in the circuits
         temp[i] <== bits.out[i] * (sq[i] - 1);
         
         // QUADRATIC CONSTRAINT 2: Update accumulator conditionally
