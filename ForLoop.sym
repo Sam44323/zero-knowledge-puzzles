@@ -1,0 +1,8 @@
+1,1,0,main.c
+2,2,0,main.in[0]
+3,3,0,main.in[1]
+4,-1,0,main.acc[0]
+5,4,0,main.acc[1]
+6,5,0,main.acc[2]
+7,6,0,main.acc[3]
+8,-1,0,main.acc[4]
