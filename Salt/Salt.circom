@@ -1,5 +1,8 @@
 pragma circom 2.1.4;
 
+include "../node_modules/circomlib/circuits/mimcsponge.circom";
+include "../node_modules/circomlib/circuits/comparators.circom";
+
 
 
 // In this exercise, we will learn an important concept related to hashing . There are 2 values a and b. You want to 
@@ -16,7 +19,33 @@ pragma circom 2.1.4;
 // Output the res using 'out'.
 
 template Salt() {
-    // Your code here..
+    signal input a;
+    signal input b;
+    signal input salt;
+    signal output out;
+
+    signal a_hash;
+    signal b_hash;
+
+    component mimc_a = MiMCSponge(2, 220, 1);
+    component mimc_b = MiMCSponge(2, 220, 1);
+    component isEqual = IsEqual();
+
+    mimc_a.ins[0] <== a;
+    mimc_a.ins[1] <== salt;
+    mimc_a.k <== 0;
+    a_hash <== mimc_a.outs[0];
+
+    mimc_b.ins[0] <== b;
+    mimc_b.ins[1] <== salt;
+    mimc_b.k <== 0;
+    b_hash <== mimc_b.outs[0];
+
+    isEqual.in[0] <== a_hash;
+    isEqual.in[1] <== b_hash;
+
+    // Ensure that a and b are the same after hashing with salt
+    out <== isEqual.out;
 }
 
 component main  = Salt();
