@@ -1,0 +1,9 @@
+1,1,2,main.c
+2,2,2,main.in[0]
+3,3,2,main.in[1]
+4,4,1,main.isEq.out
+5,-1,1,main.isEq.in[0]
+6,-1,1,main.isEq.in[1]
+7,-1,0,main.isEq.isz.out
+8,5,0,main.isEq.isz.in
+9,6,0,main.isEq.isz.inv
