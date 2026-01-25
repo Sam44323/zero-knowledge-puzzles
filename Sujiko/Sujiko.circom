@@ -20,31 +20,37 @@ template Sujiko () {
   signal input question[4];
   signal output out;
 
-  question[0] === solution[0] + solution[1] + solution[3] +solution[4];
+  // Step 1: Verify the four sum constraints
+  // Each question value must equal the sum of its four surrounding solution values
+  question[0] === solution[0] + solution[1] + solution[3] + solution[4];
   question[1] === solution[1] + solution[2] + solution[4] + solution[5];
   question[2] === solution[3] + solution[4] + solution[6] + solution[7];
   question[3] === solution[4] + solution[5] + solution[7] + solution[8];
 
-    component s[81];
-    var iter=0;
-  for(var i = 1 ; i < 10; i++){
-      for(var z = 0; z < 9 ; z++){
+  // Step 2: Verify each number 1-9 appears exactly once
+  // We create 81 IsEqual components (9 numbers × 9 positions)
+  component s[81];
+  var iter = 0;
+  
+  for(var i = 1; i < 10; i++){
+      for(var z = 0; z < 9; z++){
           s[iter] = IsEqual();
           s[iter].in[0] <== i;
           s[iter].in[1] <== solution[z];
           iter++;
       }
-      1 === s[iter-9].out + s[iter-8].out + s[iter-7].out + s[iter -6].out + s[iter -5].out + s[iter -4].out + s[iter-3].out + s[iter -2].out + s[iter -1 ].out ;
+      // For each number i, exactly one position should match (sum of outputs = 1)
+      1 === s[iter-9].out + s[iter-8].out + s[iter-7].out + s[iter-6].out + 
+            s[iter-5].out + s[iter-4].out + s[iter-3].out + s[iter-2].out + s[iter-1].out;
   }
 
-    for(var i =0 ; i < 9; i++){
-        assert(solution[i] > 0 && solution[i] < 10);
-    }
+  // Step 3: Validate range (1-9) using assertions
+  for(var i = 0; i < 9; i++){
+      assert(solution[i] > 0 && solution[i] < 10);
+  }
 
-    out <== 1;
-
+  // Step 4: If all constraints pass, output 1
+  out <== 1;
 }
 
 component main { public [ question ] } = Sujiko();
-
-

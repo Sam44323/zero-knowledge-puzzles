@@ -1,0 +1,16 @@
+1,1,2,main.out
+2,2,2,main.x
+3,3,2,main.a
+4,4,2,main.b
+5,5,2,main.c
+6,6,2,main.res
+7,7,2,main.varArr[0]
+8,8,2,main.varArr[1]
+9,9,2,main.varArr[2]
+10,10,2,main.varArr[3]
+11,-1,1,main.isEqual.out
+12,-1,1,main.isEqual.in[0]
+13,-1,1,main.isEqual.in[1]
+14,-1,0,main.isEqual.isz.out
+15,11,0,main.isEqual.isz.in
+16,12,0,main.isEqual.isz.inv
